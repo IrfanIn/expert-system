@@ -2,48 +2,65 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
-use function PHPUnit\Framework\isEmpty;
-
-class LoginController extends Controller
+class loginController extends Controller
 {
+    private $rules = [
+        'username' => 'nullable',
+        'email' => 'required',
+        'password' => 'required',
+    ];
+
     public function index()
     {
         return view('login');
     }
 
-    public function login(Request $request)
+    public function signup(Request $req)
     {
-        $input = $request->validate([
-            'username' => 'required',
-            'password' => 'required'
-        ]);
+        $cred = Validator::make($req->all(), $this->rules);
 
-        if (Auth::guard('user')->attempt($input)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('dashboard'));
-        } elseif (Auth::guard('siswa')->attempt(['nis' => $input['username'], 'password' => $input['password']])) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('histori'));
+        if ($cred->fails())
+            return back()->with('error', 'Daftar gagal');
+
+        $data = $req->validate($this->rules);
+        $data['password'] = Hash::make($req->password);
+        $user = User::create($data);
+
+        if (Auth::attempt(['email' => $req->email, 'password' => $req->password])) {
+            $req->session()->regenerate();
+            return redirect()->intended();
         }
 
-        return back()->with('error', 'login belum berhasil');
+        return back()->with('error', 'Daftar gagal');
     }
 
-    public function logout()
+    public function login(Request $req)
     {
-        if (Auth::guard('user')->check()) {
-            Auth::guard('user')->logout();
-        } elseif ((Auth::guard('siswa')->check())) {
-            Auth::guard('siswa')->logout();
+        $cred = Validator::make($req->all(), $this->rules);
+
+        if ($cred->fails())
+            return back()->with('error', 'Login gagal');
+
+        if (Auth::attempt(['email' => $req->email, 'password' => $req->password])) {
+            $req->session()->regenerate();
+            return redirect(route('landing'))->with('success', 'Login berhasil');
         }
 
-        session()->regenerateToken();
-        return redirect('/')->with('success', 'logout berhasil');
+        return back()->with('error', 'Login gagal');
+    }
+
+    public function logout(Request $req)
+    {
+        Auth::logout();
+        $req->session()->invalidate();
+        $req->session()->regenerateToken();
+        return redirect('/');
     }
 }

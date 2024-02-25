@@ -1,0 +1,22 @@
+.invoices {
+  width: 50%;
+  position: relative;
+}
+
+.backdrop {
+  /* content: ""; */
+  position: absolute;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.75);
+  inset: 0;
+  height: 100vh;
+}
+
+.content {
+  z-index: 1;
+  width: 60%;
+  background-color: white;
+  height: 100vh;
+  margin: auto;
+  mix-blend-mode: lighten;
+}

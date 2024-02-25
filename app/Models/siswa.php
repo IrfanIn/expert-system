@@ -13,11 +13,13 @@ class siswa extends Authenticatable
 
     protected $guarded = ['id'];
 
+    // relasi dengan tabel kelas
     public function kelas()
     {
         return $this->belongsTo(kelas::class);
     }
 
+    // relasi dengan tabel spp
     public function spp()
     {
         return $this->belongsTo(spp::class);
