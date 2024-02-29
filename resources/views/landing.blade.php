@@ -46,7 +46,7 @@
                     @csrf
                     @method('get')
                     @foreach ($diagnosa as $value)
-                        @foreach ($value->penyakit->rule as $data)
+                        @foreach ($value[0]->penyakit->rule as $data)
                             <div class="my-4" id="rule-wrapper">
                                 <h3>{{ $data->rule }}</h3>
 

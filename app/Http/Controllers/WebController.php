@@ -24,7 +24,7 @@ class WebController extends Controller
     public function diagnosa(Request $req)
     {
         $username = $req->username;
-        $diagnosa = gejala_detail::whereIn('gejala_id', $req->gejala)->get();
+        $diagnosa = gejala_detail::whereIn('gejala_id', $req->gejala)->get()->groupBy('penyakit_id');
         return view('landing', compact('diagnosa', 'username'));
     }
 
