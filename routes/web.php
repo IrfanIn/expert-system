@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\penyakit_controller;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,6 @@ Route::controller(WebController::class)->group(function () {
 
     Route::get('dashboard', 'dashboard')->name('dashboard');
     Route::get('analisa', 'analisa')->name('analisa');
-    Route::post('penyakit', 'store')->name('store.penyakit');
 });
+
+Route::resource('pakar', penyakit_controller::class);

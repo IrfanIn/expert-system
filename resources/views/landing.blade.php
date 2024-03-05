@@ -79,13 +79,12 @@
             </div>
         @else
             <div class="d-flex flex-column gap-3">
-                <h4 class="text-uppercase text-center font-weight-bold">Hasil analisa keseluruhan</h4>
-                <h4 class="bg-primary p-4 text-white rounded align-self-center">
-                    {{ $analisa[0]->penyakit->penyakit ?? $analisa->penyakit->penyakit }}
+                <h4 class="bg-primary p-4 rounded text-white">
+                    Hasil analisa, penyakitmu {{ $analisa[0]->penyakit->penyakit ?? '' }}
                 </h4>
                 @foreach ($analisa as $key => $value)
                     <div class="card">
-                        <div class="card-body d-flex flex-column gap-3">
+                        <div class="card-body d-flex flex-column gap-3 p-4">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h3 class="m-0">{{ $value->penyakit->penyakit }}</h3>
                                 <h5 class="m-0 {{ $key == 0 ? 'text-primary' : 'text-warning' }}">{{ $value->accuracy }}%
@@ -94,7 +93,13 @@
                             <p class="m-0">{{ $value->penyakit->keterangan }}</p>
 
                             @if ($key == 0)
-                                <h5>solusi pengobatan</h5>
+                                <h5 class="m-0">Gejala</h5>
+                                <ul>
+                                    @foreach ($value->penyakit->gejala_detail as $data)
+                                        <li>{{ $data->gejala->gejala }}</li>
+                                    @endforeach
+                                </ul>
+                                <h5 class="m-0">solusi pengobatan</h5>
                                 <ul>
                                     @foreach ($value->penyakit->solusi as $solusi)
                                         <li>{{ $solusi->solusi }}</li>

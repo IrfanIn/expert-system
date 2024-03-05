@@ -51,13 +51,15 @@ class WebController extends Controller
             }
         }
 
+        // return $analisa;
+
         return view('landing', compact('analisa'));
     }
 
     public function dashboard()
     {
-        $data = penyakit::all();
-        return view('dashboard', compact('data'));
+        $pakar = penyakit::all();
+        return view('pages.pakar.index', compact('pakar'));
     }
 
     public function analisa()
