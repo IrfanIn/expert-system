@@ -30,30 +30,26 @@ class WebController extends Controller
 
     public function result_store(Request $req)
     {
+        $result = diagnosa::whereIn('rule_id', $req->id)->get()->groupBy('penyakit_id');
 
-        $result = diagnosa::whereIn('rule_id', $req->id)->get();
-
-        $validate = analisa_detail::whereHas(
-            'analisa',
-            fn ($q) => $q->where('username', $req->username ?? auth()->user()->username)
-        )->whereIn('penyakit_id', $result->pluck('penyakit_id'));
-
-        $analisa = $validate->get()->sortByDesc('accuracy');
-        if ($validate->count() == 0) {
-            $analisa = analisa::create(['username' => $req->username ?? auth()->user()->username]);
-            foreach ($result->groupBy('penyakit_id') as $value) {
-                $accuracy = $value->count() / $result->count() * 100;
-                analisa_detail::create([
-                    'analisa_id' => $analisa->id,
-                    'penyakit_id' => $value[0]->penyakit->id,
-                    'accuracy' => $accuracy,
-                ]);
-            }
+        $analisa = analisa::create(['username' => auth()->user()->username]);
+        foreach ($result as $value) {
+            $rule = rule::where('penyakit_id', $value[0]->penyakit->id)->count();
+            $accuracy = $value->count() / $rule * 100 . ' ';
+            analisa_detail::create([
+                'analisa_id' => $analisa->id,
+                'penyakit_id' => $value[0]->penyakit->id,
+                'accuracy' => $accuracy,
+            ]);
         }
+        $data = analisa_detail::where('analisa_id', $analisa->id)->get();
 
-        // return $analisa;
+        return view('pages.result', compact('data'));
+    }
 
-        return view('landing', compact('analisa'));
+    public function result()
+    {
+        return view('pages.result');
     }
 
     public function dashboard()

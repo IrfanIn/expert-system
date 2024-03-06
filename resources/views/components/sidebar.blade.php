@@ -39,7 +39,7 @@
                 <li class="sidebar-item">
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <a class="sidebar-link bg-danger text-white" href="">
+                        <a class="sidebar-link bg-danger text-white" href="#" onclick="$(this).parent().submit()">
                             <span>
                                 <i class="fas fa-right-to-bracket"></i>
                             </span>

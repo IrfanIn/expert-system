@@ -13,6 +13,20 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @stack('css')
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.80);
+            color: white;
+        }
+
+        .form-floating {
+            color: black;
+        }
+
+        .card {
+            background-color: rgba(0, 0, 0, 0.40);
+        }
+    </style>
     <title>Aplikasi Pakar Medis</title>
 </head>
 
@@ -24,12 +38,12 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script src="https://cdn.datatables.net/v/bs5/dt-2.0.0/datatables.min.js"></script>
 
     <script>
+        $.fn.selectpicker.Constructor.BootstrapVersion = '4';
+
         $('select').selectpicker({
             liveSearch: true,
             width: '100%'

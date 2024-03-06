@@ -15,26 +15,25 @@
                     @csrf
                     @method('get')
 
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="username" id="username" placeholder=""
-                            value="{{ auth()->user()->username ?? '' }}" {{ auth()->user() ? 'disabled' : '' }} />
-                        <label for="username">Nama</label>
-                    </div>
+                    <select class="" name="gejala[]" id="" title="-- Pilih Gejala" multiple required>
+                        @foreach ($data as $value)
+                            <option value="{{ $value->id }}">{{ $value->gejala }}</option>
+                        @endforeach
+                    </select>
 
-                    <div class="d-flex gap-2">
-                        <select class="" name="gejala[]" id="" title="-- Pilih Gejala" multiple>
-                            @foreach ($data as $value)
-                                <option value="{{ $value->id }}">{{ $value->gejala }}</option>
-                            @endforeach
-                        </select>
-                        <button type="submit" class="btn btn-primary">
-                            <ion-icon name="search"></ion-icon>
+                    <div class="d-flex gap-2 align-items-center mt-3">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-magnifying-glass mx-1"></i>
+                            Mulai analisa
                         </button>
+                        <a class="btn btn-secondary" href="{{ auth()->user() ? route('dashboard') : route('login') }}">
+                            @auth
+                                <i class="fas fa-chart-simple"></i>
+                            @else
+                                <i class="fas fa-right-to-bracket"></i>
+                            @endauth
+                        </a>
                     </div>
-
-                    <a href="{{ auth()->user() ? route('dashboard') : route('login') }}">
-                        {{ auth()->user() ? 'Dashboard' : 'Login' }}
-                    </a>
                 </form>
             </div>
         @elseif (Route::is('landing.diagnosa'))
@@ -44,7 +43,6 @@
 
                 <form action="{{ route('landing.result') }}" method="post">
                     @csrf
-                    @method('get')
                     @foreach ($diagnosa as $value)
                         @foreach ($value[0]->penyakit->rule as $data)
                             <div class="my-4" id="rule-wrapper">
@@ -68,8 +66,7 @@
                     @endforeach
 
                     <button type="submit" class="btn btn-primary my-2 w-100">
-                        <i class="fas fa-magnifying-glass"></i>
-                        Mulai analisa
+                        Cari tahu penyakit
                     </button>
 
 
@@ -78,11 +75,11 @@
 
             </div>
         @else
-            <div class="d-flex flex-column gap-3">
+            <div class="d-flex flex-column gap-3 my-4">
                 <h4 class="bg-primary p-4 rounded text-white">
-                    Hasil analisa, penyakitmu {{ $analisa[0]->penyakit->penyakit ?? '' }}
+                    Hasil analisa, penyakitmu
                 </h4>
-                @foreach ($analisa as $key => $value)
+                @foreach ($data as $key => $value)
                     <div class="card">
                         <div class="card-body d-flex flex-column gap-3 p-4">
                             <div class="d-flex align-items-center justify-content-between">
@@ -110,7 +107,7 @@
                     </div>
                 @endforeach
                 <a class="btn btn-primary align-self-start" href="{{ route('landing') }}" role="button">
-                    <ion-icon name="chevron-back"></ion-icon>
+                    <i class="fas fa-arrow-circle-left"></i>
                 </a>
             </div>
         @endif
