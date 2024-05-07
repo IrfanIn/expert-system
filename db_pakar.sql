@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2024 at 11:07 AM
+-- Generation Time: May 07, 2024 at 03:46 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db-pakar`
+-- Database: `db_pakar`
 --
 
 -- --------------------------------------------------------
@@ -33,15 +33,6 @@ CREATE TABLE `analisas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `analisas`
---
-
-INSERT INTO `analisas` (`id`, `username`, `created_at`, `updated_at`) VALUES
-(30, 'Irfan', '2024-02-25 01:38:57', '2024-02-25 01:38:57'),
-(31, 'Joestar', '2024-02-25 02:09:07', '2024-02-25 02:09:07'),
-(32, 'jean', '2024-02-25 03:02:21', '2024-02-25 03:02:21');
 
 -- --------------------------------------------------------
 
@@ -58,16 +49,6 @@ CREATE TABLE `analisa_details` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `analisa_details`
---
-
-INSERT INTO `analisa_details` (`id`, `analisa_id`, `penyakit_id`, `accuracy`, `created_at`, `updated_at`) VALUES
-(39, 30, 2, 66.67, '2024-02-25 01:38:57', '2024-02-25 01:38:57'),
-(40, 30, 3, 33.33, '2024-02-25 01:38:57', '2024-02-25 01:38:57'),
-(41, 31, 2, 100.00, '2024-02-25 02:09:07', '2024-02-25 02:09:07'),
-(42, 32, 2, 100.00, '2024-02-25 03:02:21', '2024-02-25 03:02:21');
-
 -- --------------------------------------------------------
 
 --
@@ -76,8 +57,9 @@ INSERT INTO `analisa_details` (`id`, `analisa_id`, `penyakit_id`, `accuracy`, `c
 
 CREATE TABLE `diagnosas` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `rule_id` bigint(20) UNSIGNED NOT NULL,
+  `gejala_id` bigint(20) UNSIGNED NOT NULL,
   `penyakit_id` bigint(20) UNSIGNED NOT NULL,
+  `hipotesa` float NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -86,10 +68,37 @@ CREATE TABLE `diagnosas` (
 -- Dumping data for table `diagnosas`
 --
 
-INSERT INTO `diagnosas` (`id`, `rule_id`, `penyakit_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 2, '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(2, 3, 2, '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(3, 4, 3, '2024-02-25 00:39:19', '2024-02-25 00:39:19');
+INSERT INTO `diagnosas` (`id`, `gejala_id`, `penyakit_id`, `hipotesa`, `created_at`, `updated_at`) VALUES
+(10, 1, 2, 0.8, '2024-05-02 03:00:55', '2024-05-02 03:00:55'),
+(11, 2, 2, 0.7, '2024-05-02 03:00:55', '2024-05-02 03:00:55'),
+(12, 3, 2, 0.8, '2024-05-02 03:00:55', '2024-05-02 03:00:55'),
+(13, 4, 2, 0.6, '2024-05-02 03:00:55', '2024-05-02 03:00:55'),
+(14, 5, 2, 0.7, '2024-05-02 03:00:55', '2024-05-02 03:00:55'),
+(15, 6, 2, 0.8, '2024-05-02 03:00:55', '2024-05-02 03:00:55'),
+(16, 7, 2, 0.8, '2024-05-02 03:00:55', '2024-05-02 03:00:55'),
+(17, 8, 2, 0.7, '2024-05-02 03:00:55', '2024-05-02 03:00:55'),
+(18, 2, 3, 0.7, '2024-05-02 03:04:53', '2024-05-02 03:04:53'),
+(19, 3, 3, 0.8, '2024-05-02 03:04:53', '2024-05-02 03:04:53'),
+(20, 6, 3, 0.6, '2024-05-02 03:04:53', '2024-05-02 03:04:53'),
+(21, 9, 3, 0.8, '2024-05-02 03:04:53', '2024-05-02 03:04:53'),
+(22, 10, 3, 0.7, '2024-05-02 03:04:53', '2024-05-02 03:04:53'),
+(23, 11, 3, 0.6, '2024-05-02 03:04:53', '2024-05-02 03:04:53'),
+(24, 12, 3, 0.7, '2024-05-02 03:04:53', '2024-05-02 03:04:53'),
+(25, 13, 3, 0.8, '2024-05-02 03:04:53', '2024-05-02 03:04:53'),
+(26, 14, 3, 0.7, '2024-05-02 03:04:53', '2024-05-02 03:04:53'),
+(27, 15, 3, 0, '2024-05-02 03:04:53', '2024-05-02 03:04:53'),
+(28, 1, 4, 0.9, '2024-05-02 03:05:57', '2024-05-02 03:05:57'),
+(29, 4, 4, 0.7, '2024-05-02 03:05:57', '2024-05-02 03:05:57'),
+(30, 5, 4, 0.8, '2024-05-02 03:05:57', '2024-05-02 03:05:57'),
+(31, 16, 4, 0.7, '2024-05-02 03:05:57', '2024-05-02 03:05:57'),
+(32, 17, 4, 0.8, '2024-05-02 03:05:57', '2024-05-02 03:05:57'),
+(33, 18, 4, 0.7, '2024-05-02 03:05:57', '2024-05-02 03:05:57'),
+(34, 21, 4, 0.6, '2024-05-02 03:05:57', '2024-05-02 03:05:57'),
+(35, 2, 5, 0.7, '2024-05-02 03:06:43', '2024-05-02 03:06:43'),
+(36, 3, 5, 0.7, '2024-05-02 03:06:43', '2024-05-02 03:06:43'),
+(37, 18, 5, 0.8, '2024-05-02 03:06:43', '2024-05-02 03:06:43'),
+(38, 19, 5, 0.6, '2024-05-02 03:06:43', '2024-05-02 03:06:43'),
+(39, 20, 5, 0.7, '2024-05-02 03:06:43', '2024-05-02 03:06:43');
 
 -- --------------------------------------------------------
 
@@ -109,34 +118,27 @@ CREATE TABLE `gejalas` (
 --
 
 INSERT INTO `gejalas` (`id`, `gejala`, `created_at`, `updated_at`) VALUES
-(4, 'Diare dengan tinja berlemak', '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(5, 'Mual dan muntah', '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(6, 'Perut buncit', '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(7, 's', '2024-02-25 00:39:19', '2024-02-25 00:39:19');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `gejala_details`
---
-
-CREATE TABLE `gejala_details` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `gejala_id` bigint(20) UNSIGNED NOT NULL,
-  `penyakit_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `gejala_details`
---
-
-INSERT INTO `gejala_details` (`id`, `gejala_id`, `penyakit_id`, `created_at`, `updated_at`) VALUES
-(4, 4, 2, '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(5, 5, 2, '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(6, 6, 2, '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(7, 7, 3, '2024-02-25 00:39:19', '2024-02-25 00:39:19');
+(1, 'Nyeri dada', '2024-05-02 02:50:59', '2024-05-02 02:50:59'),
+(2, 'Sesak nafas', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(3, 'Kelelahan berlebih', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(4, 'Detak jantung lebih cepat', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(5, 'Berkeringat dingin', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(6, 'Pusing', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(7, 'Mual hingga muntah', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(8, 'Nyeri perut bagian atas', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(9, 'Pembengkakan pada kaki', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(10, 'Pembengkakan pada perut', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(11, 'Kenaikan berat badan', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(12, 'Sering buang air kecil malam hari', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(13, 'Hilang nafsu makan', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(14, 'Suara nafas berbunyi ( mungi )', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(15, 'Batuk disertai lendir berwarna merah muda', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(16, 'Rasa debar yang kencang di dada', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(17, 'Terasa denyutan di leher', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(18, 'Sakit kepala', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(19, 'Detak jantung yang lambat', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(20, 'Sulit berkonsentrasi', '2024-05-02 02:53:36', '2024-05-02 02:53:36'),
+(21, 'Merasa lelah', '2024-05-02 02:53:36', '2024-05-02 02:53:36');
 
 -- --------------------------------------------------------
 
@@ -175,7 +177,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `penyakits` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `penyakit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -184,9 +185,11 @@ CREATE TABLE `penyakits` (
 -- Dumping data for table `penyakits`
 --
 
-INSERT INTO `penyakits` (`id`, `penyakit`, `keterangan`, `created_at`, `updated_at`) VALUES
-(2, 'Abetalipoproteinemia', 'Abetalipoproteinemia adalah kelainan bawaan langka yang menyebabkan tubuh tidak dapat menyerap dan mencerna lemak dengan baik. Akibatnya, penderita abetalipoproteinemia sering kali mengalami kekurangan vitamin A, D, E, dan K yang parah.', '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(3, 's', 's', '2024-02-25 00:39:19', '2024-02-25 00:39:19');
+INSERT INTO `penyakits` (`id`, `penyakit`, `created_at`, `updated_at`) VALUES
+(2, 'Serangan jantung', '2024-05-02 03:00:55', '2024-05-02 03:00:55'),
+(3, 'Gagal Jantung', '2024-05-02 03:04:53', '2024-05-02 03:04:53'),
+(4, 'Aritmia Takikardia', '2024-05-02 03:05:57', '2024-05-02 03:05:57'),
+(5, 'Aritmia Bradikardia', '2024-05-02 03:06:43', '2024-05-02 03:06:43');
 
 -- --------------------------------------------------------
 
@@ -205,52 +208,6 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rules`
---
-
-CREATE TABLE `rules` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `penyakit_id` bigint(20) UNSIGNED NOT NULL,
-  `rule` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `rules`
---
-
-INSERT INTO `rules` (`id`, `penyakit_id`, `rule`, `created_at`, `updated_at`) VALUES
-(2, 2, 'Apakah mengalami pembengkakan pada mata?', '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(3, 2, 'Apakah anda mengalami gangguan darah sepert anemia?', '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(4, 3, 's', '2024-02-25 00:39:19', '2024-02-25 00:39:19');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `solusis`
---
-
-CREATE TABLE `solusis` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `penyakit_id` bigint(20) UNSIGNED NOT NULL,
-  `solusi` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `solusis`
---
-
-INSERT INTO `solusis` (`id`, `penyakit_id`, `solusi`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Pemberian suplemen vitamin A, D, E, dan K bertujuan untuk meredakan gejala dan mencegah komplikasi. Suplemen vitamin E dan A dapat diberikan untuk mengatasi gangguan pada saraf dan mata.', '2024-02-25 00:23:02', '2024-02-25 00:23:02'),
-(2, 2, 'Pemberian suplemen vitamin A, D, E, dan K bertujuan untuk meredakan gejala dan mencegah komplikasi. Suplemen vitamin E dan A dapat diberikan untuk mengatasi gangguan pada saraf dan mata.', '2024-02-25 00:24:31', '2024-02-25 00:24:31'),
-(3, 3, 's', '2024-02-25 00:39:19', '2024-02-25 00:39:19');
 
 -- --------------------------------------------------------
 
@@ -307,12 +264,6 @@ ALTER TABLE `gejalas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `gejala_details`
---
-ALTER TABLE `gejala_details`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -333,18 +284,6 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `rules`
---
-ALTER TABLE `rules`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `solusis`
---
-ALTER TABLE `solusis`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -359,31 +298,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `analisas`
 --
 ALTER TABLE `analisas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `analisa_details`
 --
 ALTER TABLE `analisa_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `diagnosas`
 --
 ALTER TABLE `diagnosas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `gejalas`
 --
 ALTER TABLE `gejalas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `gejala_details`
---
-ALTER TABLE `gejala_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -395,25 +328,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `penyakits`
 --
 ALTER TABLE `penyakits`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `rules`
---
-ALTER TABLE `rules`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `solusis`
---
-ALTER TABLE `solusis`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
