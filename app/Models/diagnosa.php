@@ -15,4 +15,9 @@ class diagnosa extends Model
     {
         return $this->belongsTo(penyakit::class);
     }
+
+    public function gejala()
+    {
+        return $this->belongsTo(gejala::class);
+    }
 }

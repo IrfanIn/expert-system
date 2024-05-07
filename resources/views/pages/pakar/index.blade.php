@@ -9,18 +9,29 @@
 
 @push('script')
     <script>
-        const addList = (elem, name) => {
-            let text = elem.parent().find('input').val()
-            if (!text) return;
-            const list = `
-                <div class="d-flex align-items-center justify-content-between">
-                    <li style="list-style: disc">${text}</li>
-                    <i class="fas fa-x cursor-pointer text-red-500" onclick="$(this).parent().remove()"></i>
-                    <input type="hidden" value="${text}" name="${name}[]" />
+        const list = (elem, name) => {
+            console.log('clicked');
+            let list = `
+                        <div class="d-flex gap-2 align-items-center">
+                            <select name="gejala_id[]" class="form-select mb-2">
+                                <option value="">- Pilih gejala</option>
+                                @foreach ($gejala as $value)
+                                    <option value="{{ $value->id }}">{{ "No-$loop->iteration $value->gejala" }}</option>/
+                                @endforeach
+                            </select>
+                            <i class="fas fa-trash text-danger cursor-pointer" onclick="$(this).parent().remove()"></i>
+                        </div>
+                    `
+
+            if (name)
+                list = `
+                <div class="d-flex gap-2 align-items-center">
+                    <input type="text" class="form-control mb-2" name="solusi[]" />
+                    <i class="fas fa-trash text-danger cursor-pointer" onclick="$(this).parents('.d-flex').remove()"></i>
                 </div>
                 `
-            elem.parents('.wrapper').find('ul').append(list)
-            elem.parent().find('input').val('')
+
+            $(elem).parents('.wrapper').find('.wrap').append(list)
         }
     </script>
 @endpush

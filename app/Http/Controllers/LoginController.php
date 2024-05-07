@@ -35,7 +35,7 @@ class loginController extends Controller
 
         if (Auth::attempt(['email' => $req->email, 'password' => $req->password])) {
             $req->session()->regenerate();
-            return redirect()->intended();
+            return redirect(route('analisa'))->intended();
         }
 
         return back()->with('error', 'Daftar gagal');
@@ -50,7 +50,7 @@ class loginController extends Controller
 
         if (Auth::attempt(['email' => $req->email, 'password' => $req->password])) {
             $req->session()->regenerate();
-            return redirect(route('landing'))->with('success', 'Login berhasil');
+            return redirect(route('analisa'))->with('success', 'Login berhasil');
         }
 
         return back()->with('error', 'Login gagal');

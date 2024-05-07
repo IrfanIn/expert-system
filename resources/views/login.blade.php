@@ -1,6 +1,16 @@
-@extends('main')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <title>Aplikasi sistem pakar</title>
+</head>
+
+<body style="background-color: #2c2c2c; color: white">
+
     <form action="{{ Route::is('login') ? route('login.post') : route('daftar.post') }}"
         class="w-25 mx-auto d-flex justify-content-center flex-column" style="height: 100vh" method="post">
         @csrf
@@ -13,32 +23,32 @@
         @endif
 
         @if (Route::is('daftar'))
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" name="username" id="username" placeholder="" />
-                <label for="username">Username</label>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" id="username" />
             </div>
         @endif
-        <div class="form-floating mb-2">
-            <input type="email" class="form-control" name="email" id="email" placeholder="" />
-            <label for="email">Email</label>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" name="email" id="email" />
         </div>
-        <div class="form-floating mb-2">
-            <input type="password" class="form-control" name="password" id="password" placeholder="" />
-            <label for="password">Password</label>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="text" class="form-control" name="password" id="password" />
         </div>
 
         <button type="submit" class="btn btn-primary w-100 mb-2">
-            <i class="fas fa-right-to-bracket"></i>
+            {{ Route::is('login') ? 'Login' : 'Daftar' }}
         </button>
 
         <div class="d-flex gap-2 align-items-center justify-content-between">
-            <a href="{{ route('landing') }}">
-                Kembali
-            </a>
             <a href="{{ Route::is('login') ? route('daftar') : route('login') }}">
                 {{ Route::is('login') ? 'Daftar' : 'Login' }}
             </a>
         </div>
 
     </form>
-@endsection
+
+</body>
+
+</html>

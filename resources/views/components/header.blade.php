@@ -6,7 +6,7 @@
                     <i class="ti ti-menu-2 fs-6"></i>
                 </a>
             </div> --}}
-            <a href="{{ route('landing') }}" class="btn text-blue-500">
+            <a href="" class="btn text-blue-500">
                 <i class="fas fa-square-virus mx-1"></i>
                 Analisa penyakit
             </a>

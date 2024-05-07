@@ -5,21 +5,15 @@
                 <thead>
                     <tr>
                         <th>no</th>
-                        <th>penyakit</th>
                         <th>gejala</th>
                         <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pakar as $value)
+                    @foreach ($gejala as $value)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $value->penyakit }}</td>
-                            <td>
-                                @foreach ($value->diagnosa as $item)
-                                    <li>{{ $item->gejala?->gejala }}</li>
-                                @endforeach
-                            </td>
+                            <td>{{ $value->gejala }}</td>
                             <td>
                                 <div class="d-flex gap-2">
                                     <button type="button" class="btn btn-warning btn-sm"

@@ -2,29 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\diagnosa;
 use App\Models\gejala;
-use App\Models\gejala_detail;
-use App\Models\penyakit;
-use App\Models\rule;
-use App\Models\solusi;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as RoutingController;
 use Illuminate\Support\Facades\Validator;
 
-class penyakit_controller extends RoutingController
+class gejala_controller extends RoutingController
 {
     private $rules = [
-        'penyakit' => 'required',
-        'gejala_id' => 'required',
+        'gejala.*' => 'required',
     ];
 
     public function index()
     {
-        return view('pages.pakar.index', [
-            'pakar' => penyakit::all(),
-            'gejala' => gejala::all(),
-        ]);
+        $gejala = gejala::all();
+        return view('pages.gejala.index', compact('gejala'));
     }
 
     /**
@@ -43,18 +35,12 @@ class penyakit_controller extends RoutingController
         $cred = Validator::make($req->all(), $this->rules);
 
         if ($cred->fails())
-            return back()->withErrors($cred->errors())->withInput();
+            return back()->withErrors($cred->errors());
 
-        $data = $req->validate($this->rules);
-
-        $penyakit = penyakit::create($data);
-
-        foreach ($req->gejala_id as $value)
-            diagnosa::create([
-                'gejala_id' => $value,
-                'penyakit_id' => $penyakit->id,
+        foreach ($req->gejala as $key => $value)
+            gejala::create([
+                'gejala' => $value,
             ]);
-
 
         return back()->with('success', 'Berhasil input data');
     }
@@ -62,14 +48,14 @@ class penyakit_controller extends RoutingController
     /**
      * Display the specified resource.
      */
-    public function show(penyakit $penyakit)
+    public function show(gejala $gejala)
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(penyakit $penyakit)
+    public function edit(gejala $gejala)
     {
         //
     }
@@ -77,22 +63,21 @@ class penyakit_controller extends RoutingController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, penyakit $penyakit)
+    public function update(Request $request, gejala $gejala)
     {
         $input = $request->validate($this->rules);
 
-        penyakit::where('id', $request->id)->update($input);
+        gejala::where('id', $request->id)->update($input);
         return back()->with('success', 'Berhasil mengubah data');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(penyakit $penyakit, $id)
+    public function destroy(gejala $gejala, $id)
     {
-        $penyakit = penyakit::find($id);
-        diagnosa::where('penyakit_id', $penyakit->id)->delete();
-        if ($penyakit->delete())
+        $gejala = gejala::find($id);
+        if ($gejala->delete())
             return back()->with('success', 'Berhasil menghapus data');
         return back()->with('error', 'Server error');
     }

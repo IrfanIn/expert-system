@@ -3,8 +3,7 @@
     <div>
         <div class="brand-logo d-flex align-items-center shadow shadow-sm">
             <div class="d-flex align-items-center gap-2" style="padding: 0 10px">
-                {{-- <img src="{{ asset('images/logo-ehospital.png') }}" alt="" width="25"> --}}
-                <a href="{{ route('landing') }}" class="fs-5">
+                <a href="" class="fs-5">
                     <small>Expert System</small>
                 </a>
             </div>
@@ -29,7 +28,15 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('dashboard') }}">
+                    <a class="sidebar-link" href="{{ route('gejala.index') }}">
+                        <span>
+                            <i class="fas fa-file-medical"></i>
+                        </span>
+                        <span class="hide-menu">Gejala</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('pakar.index') }}">
                         <span>
                             <i class="fas fa-virus"></i>
                         </span>

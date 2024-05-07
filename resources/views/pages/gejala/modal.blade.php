@@ -1,4 +1,4 @@
-<form action="{{ route('pakar.store') }}" method="post">
+<form action="{{ route('gejala.store') }}" method="post">
     @csrf
     <div class="modal fade" id="modal-0">
         <div class="modal-dialog">
@@ -7,7 +7,7 @@
                     <h4 class="modal-title">Input data kesehatan</h4>
                 </div>
                 <div class="modal-body">
-                    @include('pages.pakar.form')
+                    @include('pages.gejala.form')
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -18,8 +18,8 @@
     </div>
 </form>
 
-@foreach ($pakar as $data)
-    <form action="{{ route('pakar.update', $data->id) }}" method="post">
+@foreach ($gejala as $data)
+    <form action="{{ route('gejala.update', $data->id) }}" method="post">
         @csrf
         @method('put')
         <div class="modal fade" id="edit{{ $data->id }}">
@@ -29,7 +29,7 @@
                         <h4 class="modal-title">Edit data kesehatan</h4>
                     </div>
                     <div class="modal-body">
-                        @include('pages.pakar.form')
+                        @include('pages.gejala.form')
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>

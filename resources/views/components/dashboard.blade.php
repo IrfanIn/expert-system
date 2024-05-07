@@ -209,8 +209,6 @@
                     showDenyButton: true,
                 }).then(value => value.isConfirmed && $(this).parent().submit())
             })
-
-
         });
     </script>
     @stack('script')
