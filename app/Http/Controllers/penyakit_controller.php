@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\diagnosa;
 use App\Models\gejala;
-use App\Models\gejala_detail;
 use App\Models\penyakit;
-use App\Models\rule;
-use App\Models\solusi;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as RoutingController;
 use Illuminate\Support\Facades\Validator;
@@ -17,6 +14,7 @@ class penyakit_controller extends RoutingController
     private $rules = [
         'penyakit' => 'required',
         'gejala_id' => 'required',
+        'hipotesa' => 'required',
     ];
 
     public function index()
@@ -49,10 +47,11 @@ class penyakit_controller extends RoutingController
 
         $penyakit = penyakit::create($data);
 
-        foreach ($req->gejala_id as $value)
+        foreach ($req->gejala_id as $key => $value)
             diagnosa::create([
                 'gejala_id' => $value,
                 'penyakit_id' => $penyakit->id,
+                'hipotesa' => $req->hipotesa[$key]
             ]);
 
 

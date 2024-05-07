@@ -12,14 +12,15 @@
         const list = (elem, name) => {
             console.log('clicked');
             let list = `
-                        <div class="d-flex gap-2 align-items-center">
-                            <select name="gejala_id[]" class="form-select mb-2">
-                                <option value="">- Pilih gejala</option>
+                        <div class="d-flex gap-2 mb-2">
+                            <select name="gejala_id[]" class="selectpicker" data-title="- Pilih gejala" data-live-search="true"
+                                data-width="100%">
                                 @foreach ($gejala as $value)
                                     <option value="{{ $value->id }}">{{ "No-$loop->iteration $value->gejala" }}</option>/
                                 @endforeach
                             </select>
-                            <i class="fas fa-trash text-danger cursor-pointer" onclick="$(this).parent().remove()"></i>
+                            <input type="number" name="hipotesa[]" id="hipotesa" class="form-control" min="0" max="1"
+                                step="0.1">
                         </div>
                     `
 
@@ -32,6 +33,7 @@
                 `
 
             $(elem).parents('.wrapper').find('.wrap').append(list)
+            $('select').selectpicker('refresh')
         }
     </script>
 @endpush

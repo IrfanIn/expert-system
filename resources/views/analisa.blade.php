@@ -45,47 +45,46 @@
     <form action="{{ route('analisa.store') }}" method="post">
         @csrf
         <div class="modal fade" id="modal">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Analisa penyakit jantung</h4>
                     </div>
                     <div class="modal-body">
                         @foreach ($gejala as $item)
-                            {{-- <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="gejala_id[]" id="{{ $item->id }}"
-                                    value="{{ $item->id }}" />
-                                <label class="form-check-label" for="{{ $item->id }}"> {{ $item->gejala }}</label>
-                            </div> --}}
-                            <div class="mb-3 wrap">
-                                <p class="form-label">{{ $item->gejala }}?</p>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="{{ $item->id }}" value="1"
-                                        id="1{{ $item->id }}" />
-                                    <label class="form-check-label" for="1{{ $item->id }}">Sangat yakin</label>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mb-3 wrap">
+                                        <h4 class="form-label mb-3">{{ $item->gejala }}?</h4>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="{{ $item->id }}"
+                                                value="1" id="1{{ $item->id }}" />
+                                            <label class="form-check-label" for="1{{ $item->id }}">Sangat yakin</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="{{ $item->id }}"
+                                                value="0.8" id="2{{ $item->id }}" />
+                                            <label class="form-check-label" for="2{{ $item->id }}">Yakin</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="{{ $item->id }}"
+                                                value="0.6" id="3{{ $item->id }}" />
+                                            <label class="form-check-label" for="3{{ $item->id }}">Cukup</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="{{ $item->id }}"
+                                                value="0.2" id="4{{ $item->id }}" />
+                                            <label class="form-check-label" for="4{{ $item->id }}">Tidak tahu</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="{{ $item->id }}"
+                                                value="0" id="5{{ $item->id }}" />
+                                            <label class="form-check-label" for="5{{ $item->id }}">Tidak</label>
+                                        </div>
+                                        <input type="hidden" name="id[]" value="{{ $item->id }}" disabled>
+                                        <input type="hidden" name="hipotesa[]" disabled>
+                                    </div>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="{{ $item->id }}" value="0.8"
-                                        id="2{{ $item->id }}" />
-                                    <label class="form-check-label" for="2{{ $item->id }}">Yakin</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="{{ $item->id }}"
-                                        value="0.6" id="3{{ $item->id }}" />
-                                    <label class="form-check-label" for="3{{ $item->id }}">Cukup</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="{{ $item->id }}"
-                                        value="0.2" id="4{{ $item->id }}" />
-                                    <label class="form-check-label" for="4{{ $item->id }}">Tidak tahu</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="{{ $item->id }}"
-                                        value="0" id="5{{ $item->id }}" />
-                                    <label class="form-check-label" for="5{{ $item->id }}">Tidak</label>
-                                </div>
-                                <input type="hidden" name="id[]" value="{{ $item->id }}" disabled>
-                                <input type="hidden" name="hipotesa[]" disabled>
                             </div>
                         @endforeach
                     </div>

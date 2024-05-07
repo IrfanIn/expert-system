@@ -17,7 +17,7 @@
                             <td>{{ $value->penyakit }}</td>
                             <td>
                                 @foreach ($value->diagnosa as $item)
-                                    <li>{{ $item->gejala?->gejala }}</li>
+                                    <li>{{ $item->gejala?->gejala }} - H {{ $item->hipotesa }}</li>
                                 @endforeach
                             </td>
                             <td>
